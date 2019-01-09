@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CurrencyChange.Models.Currency>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ten)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tygia)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tygia)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<form>
+    <label>Amount</label>
+    <input type="number" name="Amount" value="" id="input">
+    <select id="select">
+        @foreach (var item in Model)
+        {
+            <option value="@item.Tygia">@item.Ten</option>
+        }
+    </select>
+    <button type="button" id="btnSubmit" value="Change">Change</button>
+    <div id="now"></div>
+</form>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#now").val = $("#select").val * $("#input").val
+    });
+</script>
+
